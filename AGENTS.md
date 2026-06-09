@@ -1,9 +1,6 @@
 # AGENTS.md
 
-Conventions for this vault, for humans and agents. It implements **Molecular Notes** by
-Robert Martin (https://github.com/robertmartin8/MolecularNotes), with two deliberate
-changes: types are declared in **YAML frontmatter** (not tags) so agents and Dataview
-parse them reliably, and a `visibility` field marks what may be shared with other brains.
+Conventions for this vault, for humans and agents. It implements **Molecular Notes** by Robert Martin (https://github.com/robertmartin8/MolecularNotes), with two deliberate changes: types are declared in **YAML frontmatter** (not tags) so agents and Dataview parse them reliably, and a `visibility` field marks what may be shared with other brains.
 
 ## Note types
 
@@ -58,8 +55,7 @@ visibility: shared
 
 ## visibility
 
-`shared` (default) · `private` (never leaves this vault) · `restricted` (only brains in
-a `share_with: []` field). Nothing syncs automatically — this just records intent.
+`shared` (default) · `private` (never leaves this vault) · `restricted` (only brains in a `share_with: []` field). Nothing syncs automatically — this just records intent.
 
 ## Conventions
 

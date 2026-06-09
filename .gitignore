@@ -8,3 +8,6 @@ Thumbs.db
 
 # Community plugin code — reinstalled from community-plugins.json on clone
 .obsidian/plugins/
+
+# JetBrains IDE
+.idea/
