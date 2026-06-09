@@ -5,7 +5,7 @@
   "newLinkFormat": "shortest",
   "attachmentFolderPath": "_attachments",
   "newFileLocation": "folder",
-  "newFileFolderPath": "Atoms",
+  "newFileFolderPath": "atoms",
   "alwaysUpdateLinks": true,
   "promptDelete": false,
   "showFrontmatter": true,

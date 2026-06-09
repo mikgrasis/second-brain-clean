@@ -11,17 +11,17 @@ visibility: shared
 ## Atoms
 
 ```dataview
-LIST FROM "Atoms" WHERE contains(topics, this.file.name) SORT file.name ASC
+LIST FROM "atoms" WHERE contains(topics, this.file.name) SORT file.name ASC
 ```
 
 ## Molecules
 
 ```dataview
-LIST FROM "Molecules" WHERE contains(topics, this.file.name) SORT file.name ASC
+LIST FROM "molecules" WHERE contains(topics, this.file.name) SORT file.name ASC
 ```
 
 ## Sources
 
 ```dataview
-LIST FROM "Sources" WHERE contains(topics, this.file.name) SORT read DESC
+LIST FROM "sources" WHERE contains(topics, this.file.name) SORT read DESC
 ```

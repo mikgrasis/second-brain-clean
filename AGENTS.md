@@ -8,10 +8,10 @@ parse them reliably, and a `visibility` field marks what may be shared with othe
 ## Note types
 
 ```
-Atoms/      knowledge derived from a source — one idea each
-Molecules/  your own observations and permanent notes
-Topics/     category notes — group related atoms/molecules
-Sources/    notes on any media: books, articles, papers, videos
+atoms/      knowledge derived from a source — one idea each
+molecules/  your own observations and permanent notes
+topics/     category notes — group related atoms/molecules
+sources/    notes on any media: books, articles, papers, videos
 ```
 
 ## Frontmatter
@@ -25,7 +25,7 @@ title: ""
 topics: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-source: []          # [[wikilinks]] to Sources/
+source: []          # [[wikilinks]] to sources/
 visibility: shared
 
 # Molecule
