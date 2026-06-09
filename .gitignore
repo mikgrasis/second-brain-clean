@@ -5,3 +5,6 @@
 .trash/
 .DS_Store
 Thumbs.db
+
+# Community plugin code — reinstalled from community-plugins.json on clone
+.obsidian/plugins/
