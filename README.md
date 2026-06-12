@@ -11,3 +11,5 @@ Changes from the original: types in YAML frontmatter instead of tags, and a `vis
 1. Open this folder in [Obsidian](https://obsidian.md) as a vault.
 2. Enable the community plugins when prompted.
 3. Write your first **source** note, pull an **atom** from it, connect atoms into a **molecule**, group them under a **topic**.
+
+A placeholder example of each note type is included — [[Example Topic]], [[Example Source]], [[Example Atom]], [[Example Molecule]] — so the graph view has something to render on first open. Delete these once you've started your own vault.
