@@ -13,3 +13,11 @@ Changes from the original: types in YAML frontmatter instead of tags, and a `vis
 3. Write your first **source** note, pull an **atom** from it, connect atoms into a **molecule**, group them under a **topic**.
 
 A placeholder example of each note type is included — [[Example Topic]], [[Example Source]], [[Example Atom]], [[Example Molecule]] — so the graph view has something to render on first open. Delete these once you've started your own vault.
+
+## Graph colors
+
+`.obsidian/graph.json` is tracked so the vault ships with color groups for `atoms/`, `molecules/`, `topics/`, `sources/` already set up. After cloning, mark it as "skip worktree" so your local zoom/pan/search changes don't show up as diffs:
+
+```sh
+git update-index --skip-worktree .obsidian/graph.json
+```
