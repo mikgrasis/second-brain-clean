@@ -10,3 +10,6 @@ Thumbs.db
 
 # JetBrains IDE
 .idea/
+
+# Per-session view state (zoom/pan/search); colors restored via _scripts/restore-graph-colors.ps1
+.obsidian/graph.json
