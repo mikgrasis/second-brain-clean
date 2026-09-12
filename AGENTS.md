@@ -53,6 +53,20 @@ read: YYYY-MM-DD
 visibility: shared
 ```
 
+## ideas/ (optional)
+
+A brain may have an `ideas/` folder — a lightweight backlog for things worth exploring
+here later. It's self-contained: see `ideas/AGENTS.md` if present. Absent means this
+brain hasn't opted in; nothing else in this file depends on it either way.
+
+## skills/ (optional)
+
+A brain may ship its own `skills/<name>/SKILL.md` files — per-brain skills that travel
+with the vault in git, rather than living only in an account's installed-skills list.
+`skills/brain-ideas/SKILL.md` operates on `ideas/` if present. These two folders are
+registered independently: removing `ideas/` doesn't remove `skills/brain-ideas/`, and
+vice versa — clean up both if fully retiring a feature.
+
 ## visibility
 
 `shared` (default) · `private` (never leaves this vault) · `restricted` (only brains in a `share_with: []` field). Nothing syncs automatically — this just records intent.
