@@ -37,7 +37,13 @@ if (-not (Test-Path -LiteralPath $graphDir)) {
     New-Item -ItemType Directory -Path $graphDir -Force | Out-Null
 }
 
-$json | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $graphPath -Encoding UTF8
+$jsonText = $json | ConvertTo-Json -Depth 10
+# Windows PowerShell 5.1's `Set-Content -Encoding UTF8` always prepends a
+# UTF-8 BOM. Obsidian's JSON parser can't handle the BOM: it silently falls
+# back to a colorless default and overwrites this file on its next save,
+# undoing the fix. Write BOM-less UTF-8 explicitly instead.
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($graphPath, $jsonText, $utf8NoBom)
 
 Write-Host "Graph color groups applied ($graphPath)."
 Write-Host "Make sure Obsidian is fully closed, then (re)open the vault."
