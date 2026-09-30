@@ -2,6 +2,22 @@
 
 Conventions for this vault, for humans and agents. It implements **Molecular Notes** by Robert Martin (https://github.com/robertmartin8/MolecularNotes), with two deliberate changes: types are declared in **YAML frontmatter** (not tags) so agents and Dataview parse them reliably, and a `visibility` field marks what may be shared with other brains.
 
+## The noun rule
+
+> **Atoms are nouns. Molecules are claims.**
+
+An atom is a thing with a name: a role, document, technique, event, organization or skill. Test: could the title be a Wikipedia article or a glossary entry? If the title asserts something, it is a molecule.
+
+- **Atoms are prose, relevance first.** Open with why the thing matters to the reader (a hook, not a definition), fold the definition into the first paragraph, then report what the sources say with verbatim quotes woven into sentences, each followed by a link to the source note's heading, `([[Source Note#Heading]])`. End on the tension or implication. Two to four paragraphs, then `## Related`. Atoms report disagreement between sources; they don't adjudicate it.
+- **Molecules are prose too**, titled as a claim: the claim and its evidence, then the counter-case (required when anything cuts the other way), then what follows. No section headings.
+- Every cited quote must appear verbatim in the linked source note. Straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes.
+- Naming: singular, no article, parenthetical to disambiguate.
+- Background not found in any source is marked as general reference in the discussion.
+
+## Top-level topics
+
+Hubs are built from `_templates/topic.md`: a one-line scope and an **Excludes** line above the template's Dataview lists (never hand-written member lists).
+
 ## Note types
 
 ```
