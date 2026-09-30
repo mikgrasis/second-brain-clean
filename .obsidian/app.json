@@ -12,6 +12,7 @@
   "spellcheck": true,
   "userIgnoreFilters": [
     "_templates/",
-    "_attachments/"
+    "_attachments/",
+    "_evidence/"
   ]
 }
