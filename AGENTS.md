@@ -31,9 +31,14 @@ Swappable modules in `_style/`. Read the ones this vault uses before writing.
 
 Every quote is verbatim from a source note and links the heading it sits under: `"…quoted text…" ([[Source Note#Heading]])`. Use straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes. With a BibTeX library, cite books and papers in prose with pandoc keys, `[@kolda2009tensor]`.
 
-## Top-level topics
+## Topics
 
-Hubs are built from `_templates/topic.md`: a one-line scope and an **Excludes** line above the template's Dataview lists (never hand-written member lists). A large vault may use two tiers: a sub-hub names its parent hub in `parent:`.
+Hubs are built from `_templates/topic.md`: a one-line scope and an **Excludes** line above the template's Dataview lists (never hand-written member lists).
+
+- Start with one hub per area.
+- A hub that reaches ~25 notes splits into sub-hubs; each names its hub in `parent:`.
+- A note lists its most specific hub in `topics:`, not the parent as well.
+- A hub under ~3 notes merges back into its parent.
 
 ## Note types
 
