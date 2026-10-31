@@ -8,6 +8,12 @@ visibility: shared
 
 # {{title}}
 
+## Sub-hubs
+
+```dataview
+LIST FROM [[]] AND "topics" SORT file.name ASC
+```
+
 ## Atoms
 
 ```dataview
