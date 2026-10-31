@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Number [@key] citations and write each note's ## References block from a BibTeX file.
 
-Usage: python3 _scripts/build_references.py [--check] [--bib library.bib] [--csl _scripts/ieee.csl] [folder ...]
+Usage: python3 _scripts/build_references.py [--check] [--bib library.bib] [--library VAULT] [--csl _scripts/ieee.csl] [folder ...]
 
 Defaults: library.bib at the vault root, _scripts/ieee.csl, folders atoms/ and molecules/. Needs pandoc.
+
+With --library, the bibliography is that library vault's library.bib (unless --bib says otherwise), and
+each entry links to the paper's note there, references/<key>.md, when it exists.
 
 In a note, write [@key], [@a; @b, p. 3] or @key. The script numbers them by first appearance,
 [@a; @b, p. 3] -> \\[[[#^ref-a|1]], [[#^ref-b|2]], p. 3\\], and writes the entries, formatted by pandoc
@@ -12,6 +15,7 @@ back into keys first, so edit with keys or numbers alike and rerun. --check chan
 if a note would change. Keys missing from the bibliography are left as written and reported.
 """
 import argparse, pathlib, re, subprocess, sys
+from urllib.parse import quote
 
 VAULT = pathlib.Path(__file__).resolve().parent.parent
 KEY = r"[A-Za-z0-9_][A-Za-z0-9_:.\-]*[A-Za-z0-9_]"
@@ -77,13 +81,19 @@ def render(keys, bib, csl):
     return [re.sub(r"^\\\[\d+\\\]\s*", "", b) for b in blocks]
 
 
-def build(text, keys, ids, bib, csl):
+def library_link(key, lib):
+    if lib is None or not (lib / "references" / f"{key}.md").exists():
+        return ""
+    return f" · [{lib.name}](obsidian://open?vault={quote(lib.name)}&file={quote('references/' + key, safe='')})"
+
+
+def build(text, keys, ids, bib, csl, lib=None):
     base = masked(REFS.sub("", text), lambda t: unnumber(t, ids)).rstrip("\n") + "\n"
     head, body = base.split("\n---\n", 1) if base.startswith("---\n") else ("", base)
     body, order = masked(body, lambda t: number(t, keys))
     if order:
         items = render(order, bib, csl)
-        entries = [f"\\[{i}\\] {item} ^{block_id(k)}" for i, (k, item) in enumerate(zip(order, items), 1)]
+        entries = [f"\\[{i}\\] {item}{library_link(k, lib)} ^{block_id(k)}" for i, (k, item) in enumerate(zip(order, items), 1)]
         body = (body.rstrip("\n") + f"\n\n## References\n\n%% refs:start: generated from {bib.name}, do not edit %%\n"
                 + "\n\n".join(entries) + "\n%% refs:end %%\n")
     return (head + "\n---\n" + body) if head else body
@@ -92,11 +102,14 @@ def build(text, keys, ids, bib, csl):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true")
-    ap.add_argument("--bib", default="library.bib")
+    ap.add_argument("--bib")
+    ap.add_argument("--library")
     ap.add_argument("--csl", default="_scripts/ieee.csl")
     ap.add_argument("folders", nargs="*", default=["atoms", "molecules"])
     a = ap.parse_args()
-    bib, csl = VAULT / a.bib, VAULT / a.csl
+    lib = (VAULT / a.library).resolve() if a.library else None
+    bib = VAULT / a.bib if a.bib else (lib / "library.bib" if lib else VAULT / "library.bib")
+    csl = VAULT / a.csl
     if not bib.exists():
         sys.exit(f"no bibliography at {bib}")
     keys = set(re.findall(r"@\w+\s*\{\s*([^,\s]+)\s*,", bib.read_text(encoding="utf-8")))
@@ -106,7 +119,7 @@ def main():
         for p in sorted((VAULT / folder).rglob("*.md")):
             text = p.read_text(encoding="utf-8")
             missing |= {k for k in re.findall(r"(?<![\w.])@(" + KEY + r")", masked(text, lambda t: CODE.sub("", t))) if k not in keys}
-            new = build(text, keys, ids, bib, csl)
+            new = build(text, keys, ids, bib, csl, lib)
             if new != text:
                 changed.append(p.relative_to(VAULT))
                 if not a.check:

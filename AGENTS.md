@@ -29,7 +29,7 @@ Swappable modules in `_style/`. Read the ones this vault uses before writing.
 
 ## Citations
 
-Every quote is verbatim from a source note and links the heading it sits under: `"…quoted text…" ([[Source Note#Heading]])`. Use straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes. With a BibTeX library (`library.bib` at the vault root), cite books and papers in prose with pandoc keys, `[@kolda2009tensor]`; `python3 _scripts/build_references.py` numbers them and writes each note's `## References`.
+Every quote is verbatim from a source note and links the heading it sits under: `"…quoted text…" ([[Source Note#Heading]])`. Use straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes. With a BibTeX library (`library.bib` at the vault root), cite books and papers in prose with pandoc keys, `[@kolda2009tensor]`; `python3 _scripts/build_references.py` numbers them and writes each note's `## References`. With a separate library vault ([paper-brain-clean](https://github.com/mikgrasis/paper-brain-clean)), pass `--library <path>`: it uses that vault's `library.bib` and links each entry to the paper's note.
 
 ## Topics
 
