@@ -2,8 +2,6 @@
 
 Conventions for this vault, for humans and agents, based on **Molecular Notes** by Robert Martin (https://github.com/robertmartin8/MolecularNotes).
 
-If `AGENTS.local.md` exists, read it next; it wins where the two differ.
-
 ## The noun rule
 
 > **Atoms are nouns. Molecules are claims.**
@@ -25,7 +23,7 @@ Swappable modules in `_style/`. Read the ones this vault uses before writing.
 | Atom extraction | `_style/Atom Extraction.md` | always |
 | Atom shape | `_style/Atoms - Short.md` or `_style/Atoms - Full.md` | Short |
 | Molecules | `_style/Molecules.md` | always |
-| Voice | `_style/Voice - Plain.md` or `_style/Voice - Scientific.md` | Plain |
+| Voice | `_style/Voice - Plain.md`, or `_style/Voice - Scientific.md` on top of it | Plain |
 
 ## Citations
 
