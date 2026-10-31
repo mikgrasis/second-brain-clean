@@ -1,30 +1,48 @@
 # AGENTS.md
 
-Conventions for this vault, for humans and agents. It implements **Molecular Notes** by Robert Martin (https://github.com/robertmartin8/MolecularNotes), with two deliberate changes: types are declared in **YAML frontmatter** (not tags) so agents and Dataview parse them reliably, and a `visibility` field marks what may be shared with other brains.
+Conventions for this vault, for humans and agents, based on **Molecular Notes** by Robert Martin (https://github.com/robertmartin8/MolecularNotes).
+
+If `AGENTS.local.md` exists, read it next; it wins where the two differ.
 
 ## The noun rule
 
 > **Atoms are nouns. Molecules are claims.**
 
-An atom is a thing with a name: a role, document, technique, event, organization or skill. Test: could the title be a Wikipedia article or a glossary entry? If the title asserts something, it is a molecule.
+An atom is a thing with a name: a concept, technique, method, role, document, event, organization or skill. Test: could the title be a Wikipedia article or a glossary entry? If the title asserts something, it's a molecule.
 
-- **Atoms are prose, relevance first.** Open with why the thing matters to the reader (a hook, not a definition), fold the definition into the first paragraph, then report what the sources say with verbatim quotes woven into sentences, each followed by a link to the source note's heading, `([[Source Note#Heading]])`. End on the tension or implication. Two to four paragraphs, then `## Related`. Atoms report disagreement between sources; they don't adjudicate it.
-- **Molecules are prose too**, titled as a claim: the claim and its evidence, then the counter-case (required when anything cuts the other way), then what follows. No section headings.
-- Every cited quote must appear verbatim in the linked source note. Straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes.
-- Naming: singular, no article, parenthetical to disambiguate.
-- Background not found in any source is marked as general reference in the discussion.
+## Atoms
+
+- **Relevance first:** the opening sentence says why the concept matters, then the definition.
+- **End on the tension or implication.** Report disagreement between sources; don't adjudicate it.
+- Background not found in any source is marked `(general reference)`.
+
+## Style modules
+
+Swappable modules in `_style/`. Read the ones this vault uses before writing.
+
+| Module | Choice | Default |
+|---|---|---|
+| Atom extraction | `_style/Atom Extraction.md` | always |
+| Atom shape | `_style/Atoms - Short.md` or `_style/Atoms - Full.md` | Short |
+| Molecules | `_style/Molecules.md` | always |
+| Voice | `_style/Voice - Plain.md` or `_style/Voice - Scientific.md` | Plain |
+
+## Citations
+
+Every quote is verbatim from a source note and links the heading it sits under: `"…quoted text…" ([[Source Note#Heading]])`. Use straight outer quotes by default; curly outer quotes (“…”) when the quote itself contains straight quotes. With a BibTeX library, cite books and papers in prose with pandoc keys, `[@kolda2009tensor]`.
 
 ## Top-level topics
 
-Hubs are built from `_templates/topic.md`: a one-line scope and an **Excludes** line above the template's Dataview lists (never hand-written member lists).
+Hubs are built from `_templates/topic.md`: a one-line scope and an **Excludes** line above the template's Dataview lists (never hand-written member lists). A large vault may use two tiers: a sub-hub names its parent hub in `parent:`.
 
 ## Note types
 
 ```
-atoms/      knowledge derived from a source — one idea each
-molecules/  your own observations and permanent notes
-topics/     category notes — group related atoms/molecules
-sources/    notes on any media: books, articles, papers, videos
+atoms/      nouns: concepts derived from sources, one each
+molecules/  your own thinking, in kinds (see _style/Molecules.md)
+topics/     hubs that group atoms and molecules
+sources/    notes on media: books, papers, articles, videos, podcasts
+_style/     style modules: atom extraction, atom shape, molecules, voice
 ```
 
 ## Frontmatter
@@ -35,24 +53,27 @@ Common to all notes: `type`, `title`, `topics`, `created`, `updated`, `visibilit
 # Atom
 type: atom
 title: ""
+aliases: []         # optional: other spellings, acronyms
 topics: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-source: []          # [[wikilinks]] to sources/
+source: []          # [[wikilinks]] to every source note quoted
 visibility: shared
 
 # Molecule
 type: molecule
+kind: claim         # claim | list | comparison | discussion | survey | campaign | requirements
 title: ""
 topics: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-atoms: []           # [[wikilinks]] to atoms it connects
+atoms: []           # [[wikilinks]] to the atoms it builds on
 visibility: shared
 
 # Topic
 type: topic
 title: ""
+parent: ""          # optional: [[parent hub]] for a sub-hub
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 visibility: shared
@@ -61,7 +82,7 @@ visibility: shared
 type: source
 title: ""
 author: ""
-kind: book          # book | article | paper | post | video | podcast | course
+kind: book          # book | paper | article | post | video | podcast | course
 url: ""
 topics: []
 created: YYYY-MM-DD
@@ -71,24 +92,17 @@ visibility: shared
 
 ## ideas/ (optional)
 
-A brain may have an `ideas/` folder — a lightweight backlog for things worth exploring
-here later. It's self-contained: see `ideas/AGENTS.md` if present. Absent means this
-brain hasn't opted in; nothing else in this file depends on it either way.
+A vault may have an `ideas/` folder — a lightweight backlog for things worth exploring here later. It's self-contained: see `ideas/AGENTS.md` if present. Absent means this vault hasn't opted in.
 
 ## skills/ (optional)
 
-A brain may ship its own `skills/<name>/SKILL.md` files — per-brain skills that travel
-with the vault in git, rather than living only in an account's installed-skills list.
-`skills/brain-ideas/SKILL.md` operates on `ideas/` if present. These two folders are
-registered independently: removing `ideas/` doesn't remove `skills/brain-ideas/`, and
-vice versa — clean up both if fully retiring a feature.
+A vault may ship its own `skills/<name>/SKILL.md` files — agent skills that travel with the vault in git. `skills/brain-ideas/SKILL.md` operates on `ideas/` if present. Removing one doesn't remove the other; clean up both when retiring a feature.
 
 ## visibility
 
-`shared` (default) · `private` (never leaves this vault) · `restricted` (only brains in a `share_with: []` field). Nothing syncs automatically — this just records intent.
+`shared` (default) · `private` (never leaves this vault) · `restricted` (only vaults listed in a `share_with: []` field). Nothing syncs automatically — this just records intent.
 
 ## Conventions
 
-- Wikilinks (`[[ ]]`), not markdown links.
-- One concept per atom.
-- Topics are for grouping; keep explanation in the atoms/molecules.
+- Wikilinks (`[[ ]]`) inside the vault, not Markdown links.
+- Topics group; explanation lives in atoms and molecules.
