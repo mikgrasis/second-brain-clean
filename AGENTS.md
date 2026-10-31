@@ -10,7 +10,6 @@ An atom is a thing with a name: a concept, technique, method, role, document, ev
 
 ## Atoms
 
-- **Relevance first:** the opening sentence says why the concept matters, then the definition.
 - **End on the tension or implication.** Report disagreement between sources; don't adjudicate it.
 - Background not found in any source is marked `(general reference)`.
 
