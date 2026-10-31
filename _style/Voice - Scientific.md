@@ -6,9 +6,9 @@ visibility: shared
 
 # Voice - Scientific
 
-For math- and method-heavy vaults. **Everything in `Voice - Plain` applies** — above all, a note opens with context and invites reading; a definition or an equation is never its first sentence. These rules add to it.
+For math- and method-heavy vaults. **Everything in `Voice - Plain` applies;** these rules add to it.
 
-1. **Context, then definition.** Say what the concept is for, where it shows up and why it matters; then define it, with its equation.
+1. **The definition carries its equation.** After the context, define the concept with its defining equation.
 2. **Equations are part of sentences.** Introduce an equation with the sentence (*we have*, *is given by*, *via*, *i.e.,*), punctuate it, and follow it with a *where* clause for its symbols. Short expressions sit inline; an equation you refer to is a numbered display (`\tag{1}`, numbering local to the note), referred to as "(1)".
 3. **Every new symbol gets its space or dimensions at first use:** "where $U \in \mathbb{R}^{I \times R}$ contains the $R$ dominant left singular vectors".
 4. **One notation per vault.** Fix symbols, index letters and macros once for the vault; translate other sources' notation into it, never copy. A quote containing notation stays verbatim, so prefer quotes without math.
