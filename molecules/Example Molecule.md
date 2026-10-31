@@ -1,5 +1,6 @@
 ---
 type: molecule
+kind: claim
 title: "Example Molecule"
 topics:
   - "[[Example Topic]]"
