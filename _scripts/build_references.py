@@ -94,8 +94,13 @@ def build(text, keys, ids, bib, csl, lib=None):
     if order:
         items = render(order, bib, csl)
         entries = [f"\\[{i}\\] {item}{library_link(k, lib)} ^{block_id(k)}" for i, (k, item) in enumerate(zip(order, items), 1)]
-        body = (body.rstrip("\n") + f"\n\n## References\n\n%% refs:start: generated from {bib.name}, do not edit %%\n"
-                + "\n\n".join(entries) + "\n%% refs:end %%\n")
+        block = (f"## References\n\n%% refs:start: generated from {bib.name}, do not edit %%\n"
+                 + "\n\n".join(entries) + "\n%% refs:end %%\n")
+        cut = body.find("\n## Provenance")
+        if cut >= 0:      # full atoms: References before Provenance
+            body = body[:cut].rstrip("\n") + "\n\n" + block + "\n" + body[cut + 1:]
+        else:
+            body = body.rstrip("\n") + "\n\n" + block
     return (head + "\n---\n" + body) if head else body
 
 
