@@ -1,6 +1,7 @@
 ---
 type: topic
 title: "{{title}}"
+parent: ""
 created: {{date:YYYY-MM-DD}}
 updated: {{date:YYYY-MM-DD}}
 visibility: shared
@@ -11,7 +12,7 @@ visibility: shared
 ## Sub-hubs
 
 ```dataview
-LIST FROM [[]] AND "topics" SORT file.name ASC
+LIST FROM "topics" WHERE parent = this.file.link SORT file.name ASC
 ```
 
 ## Atoms
