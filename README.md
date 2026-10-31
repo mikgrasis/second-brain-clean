@@ -17,6 +17,7 @@ Plugins: Dataview and Templater.
 1. Open this folder in [Obsidian](https://obsidian.md) as a vault.
 2. Enable the community plugins when prompted.
 3. Write your first **source** note, pull an **atom** from it, build a **molecule** on atoms, group them under a **topic**.
+4. Citing papers: put your BibTeX file at `library.bib`, cite `[@key]`, run `python3 _scripts/build_references.py` (needs [pandoc](https://pandoc.org)).
 
 A placeholder of each note type is included — [[Example Topic]], [[Example Source]], [[Example Atom]], [[Example Molecule]] — so the graph has something to render on first open. Delete them once you've started.
 
